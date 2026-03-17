@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22 Studios — Graba como un artista profesional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #03010a;
+    --deep: #07030f;
+    --surface: #0d0618;
+    --card: #110820;
+    --border: rgba(138, 43, 226, 0.18);
+    --border-bright: rgba(138, 43, 226, 0.45);
+    --purple-core: #8b1fff;
+    --purple-bright: #a855f7;
+    --purple-glow: #c084fc;
+    --purple-dim: #6d28d9;
+    --neon: #e879f9;
+    --neon-soft: rgba(232, 121, 249, 0.15);
+    --white: #f0e6ff;
+    --white-dim: rgba(240, 230, 255, 0.6);
+    --white-ghost: rgba(240, 230, 255, 0.12);
+    --text: #d4b8f0;
+    --text-dim: rgba(212, 184, 240, 0.55);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── RUNIC BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 31, 255, 0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 90% 60%, rgba(168, 85, 247, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 10% 80%, rgba(109, 40, 217, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grid overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(138, 43, 226, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(138, 43, 226, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  * { position: relative; z-index: 1; }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--purple-core); border-radius: 2px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    background: rgba(3, 1, 10, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span {
+    color: var(--purple-bright);
+    text-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--purple-glow); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--purple-core), var(--purple-dim));
+    color: var(--white) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 15px rgba(139, 31, 255, 0.3);
+    transition: box-shadow 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover {
+    box-shadow: 0 0 30px rgba(139, 31, 255, 0.6) !important;
+    transform: translateY(-1px);
+    color: var(--white) !important;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--purple-bright);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 5% 60px;
+    overflow: hidden;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(139, 31, 255, 0.12);
+    border: 1px solid var(--border-bright);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple-glow);
+    margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--neon);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--neon);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+  .hero-title .accent {
+    display: block;
+    background: linear-gradient(135deg, var(--purple-bright), var(--neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.5));
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: 400;
+    color: var(--white-dim);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--purple-core), var(--purple-dim));
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 30px rgba(139, 31, 255, 0.4), 0 4px 20px rgba(0,0,0,0.5);
+    transition: all 0.25s;
+    letter-spacing: 0.04em;
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 50px rgba(139, 31, 255, 0.7), 0 8px 30px rgba(0,0,0,0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-bright);
+    transition: all 0.25s;
+    letter-spacing: 0.04em;
+  }
+  .btn-secondary:hover {
+    border-color: var(--purple-bright);
+    color: var(--purple-glow);
+    background: rgba(139, 31, 255, 0.08);
+  }
+
+  /* Orb decorations */
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(139, 31, 255, 0.25), transparent 70%);
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    animation: float 8s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(232, 121, 249, 0.15), transparent 70%);
+    bottom: 10%; right: 5%;
+    animation: float 10s 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(-50%); }
+    50% { transform: translateY(-20px) translateX(-50%); }
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 1s 0.5s ease both;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--purple-bright), var(--neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 90px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--purple-bright);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-tag::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--purple-bright);
+    box-shadow: 0 0 8px var(--purple-bright);
+  }
+
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-title span {
+    background: linear-gradient(135deg, var(--purple-bright), var(--neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--white-dim);
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .step-card:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+  .step-card:hover::before { opacity: 1; }
+
+  .step-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: rgba(139, 31, 255, 0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .step-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .step-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  .step-desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
+
+  /* ─── MEMBERSHIPS ─── */
+  #membresias { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .plan-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .plan-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100px;
+    background: radial-gradient(ellipse at bottom, rgba(139, 31, 255, 0.05), transparent);
+    pointer-events: none;
+  }
+  .plan-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .plan-card.featured {
+    border-color: rgba(139, 31, 255, 0.5);
+    background: linear-gradient(160deg, #130a24, #0d0618);
+    box-shadow: 0 0 40px rgba(139, 31, 255, 0.2);
+  }
+  .plan-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple-dim), var(--purple-bright), var(--neon), var(--purple-bright), var(--purple-dim));
+  }
+
+  .plan-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--purple-core), var(--purple-dim));
+    color: var(--white);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+    box-shadow: 0 0 15px rgba(139, 31, 255, 0.4);
+  }
+
+  .plan-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+
+  .plan-tagline {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 1.75rem;
+  }
+
+  .plan-price {
+    margin-bottom: 1.75rem;
+  }
+  .price-amount {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+  .price-amount span {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+  .price-period {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+  }
+
+  .plan-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 1.75rem;
+  }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex: 1;
+  }
+  .plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .plan-features li::before {
+    content: '';
+    width: 16px; height: 16px;
+    background: rgba(139, 31, 255, 0.2);
+    border: 1px solid rgba(139, 31, 255, 0.4);
+    border-radius: 4px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23a855f7' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .plan-cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 0.9rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-bright);
+    color: var(--purple-glow);
+    background: rgba(139, 31, 255, 0.08);
+    transition: all 0.25s;
+  }
+  .plan-cta:hover {
+    background: linear-gradient(135deg, var(--purple-core), var(--purple-dim));
+    color: var(--white);
+    border-color: transparent;
+    box-shadow: 0 0 25px rgba(139, 31, 255, 0.4);
+  }
+  .plan-card.featured .plan-cta {
+    background: linear-gradient(135deg, var(--purple-core), var(--purple-dim));
+    color: var(--white);
+    border-color: transparent;
+    box-shadow: 0 0 25px rgba(139, 31, 255, 0.3);
+  }
+  .plan-card.featured .plan-cta:hover {
+    box-shadow: 0 0 40px rgba(139, 31, 255, 0.6);
+    transform: translateY(-1px);
+  }
+
+  /* ─── SERVICES ─── */
+  #servicios { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card:hover {
+    border-color: var(--border-bright);
+    background: rgba(17, 8, 32, 0.9);
+  }
+  .service-card:hover .service-glow {
+    opacity: 1;
+  }
+  .service-glow {
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(139, 31, 255, 0.15), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .service-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .service-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.03em;
+  }
+  .service-price {
+    font-size: 0.85rem;
+    color: var(--purple-glow);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .service-desc { font-size: 0.8rem; color: var(--text-dim); }
+
+  /* ─── DROP SECTION ─── */
+  .drop-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 5%;
+  }
+  .drop-banner {
+    background: linear-gradient(135deg, #130a24, #0c0519);
+    border: 1px solid rgba(139, 31, 255, 0.4);
+    border-radius: 20px;
+    padding: 3rem 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(139, 31, 255, 0.12);
+  }
+  .drop-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  }
+  .drop-orb {
+    position: absolute;
+    right: -80px; top: 50%;
+    transform: translateY(-50%);
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(139, 31, 255, 0.2), transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .drop-text .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--neon);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .drop-text h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  .drop-text h2 span {
+    color: var(--neon);
+    text-shadow: 0 0 20px rgba(232, 121, 249, 0.5);
+  }
+  .drop-text p { font-size: 0.95rem; color: var(--white-dim); max-width: 400px; }
+  .drop-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+  .cupos-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232, 121, 249, 0.1);
+    border: 1px solid rgba(232, 121, 249, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: var(--neon);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .cupos-dot {
+    width: 8px; height: 8px;
+    background: var(--neon);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon);
+    animation: pulse 1.5s infinite;
+  }
+
+  /* ─── RULES ─── */
+  #como-funciona { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: border-color 0.3s;
+  }
+  .rule-item:hover { border-color: var(--border-bright); }
+  .rule-icon {
+    width: 38px; height: 38px;
+    background: rgba(139, 31, 255, 0.15);
+    border: 1px solid rgba(139, 31, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .rule-content {}
+  .rule-title {
+    font-weight: 600;
+    color: var(--white);
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+  .rule-desc { font-size: 0.82rem; color: var(--text-dim); }
+
+  /* ─── SESSION PROMO ─── */
+  .session-promo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 5% 90px;
+  }
+  .session-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .session-card h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .session-card p { font-size: 0.95rem; color: var(--white-dim); }
+  .session-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--purple-glow);
+    margin-top: 0.5rem;
+  }
+
+  /* ─── CONTACT / RESERVAS ─── */
+  #reservas { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .contact-card.wa::before { background: linear-gradient(90deg, #25D366, #128C7E); }
+  .contact-card.ig::before { background: linear-gradient(90deg, #E1306C, #833AB4, #FCAF45); }
+  .contact-card:hover::before { opacity: 1; }
+
+  .contact-icon {
+    width: 60px; height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+  }
+  .contact-card.wa .contact-icon { background: rgba(37, 211, 102, 0.12); border: 1px solid rgba(37, 211, 102, 0.25); }
+  .contact-card.ig .contact-icon { background: rgba(225, 48, 108, 0.12); border: 1px solid rgba(225, 48, 108, 0.25); }
+
+  .contact-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .contact-handle { font-size: 0.85rem; color: var(--text-dim); }
+  .contact-action {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-top: 0.5rem;
+    transition: all 0.25s;
+  }
+  .contact-card.wa .contact-action {
+    background: rgba(37, 211, 102, 0.12);
+    color: #25D366;
+    border: 1px solid rgba(37, 211, 102, 0.3);
+  }
+  .contact-card.ig .contact-action {
+    background: rgba(225, 48, 108, 0.12);
+    color: #E1306C;
+    border: 1px solid rgba(225, 48, 108, 0.3);
+  }
+  .contact-card.wa:hover .contact-action { background: rgba(37, 211, 102, 0.2); }
+  .contact-card.ig:hover .contact-action { background: rgba(225, 48, 108, 0.2); }
+
+  /* ─── PORTFOLIO ─── */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .reel-wrapper {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .reel-wrapper:hover { border-color: var(--border-bright); }
+  @media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr; max-width: 500px; margin-left: auto; margin-right: auto; } }
+
+
+  /* ─── YOUTUBE GRID ─── */
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-top: 3rem;
+  }
+  .yt-card {
+    text-decoration: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .yt-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  }
+  .yt-card:hover .yt-play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .yt-card:hover img {
+    transform: scale(1.05);
+  }
+  .yt-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #0a0515;
+  }
+  .yt-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .yt-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    width: 52px; height: 52px;
+    background: rgba(139, 31, 255, 0.85);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s;
+    box-shadow: 0 0 25px rgba(139,31,255,0.6);
+    backdrop-filter: blur(4px);
+  }
+  .yt-info {
+    padding: 0.85rem 1rem;
+    flex: 1;
+  }
+  .yt-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .yt-artist {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media (max-width: 1100px) { .yt-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 750px)  { .yt-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; } }
+  @media (max-width: 480px)  { .yt-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; } }
+
+  /* ─── SOCIAL CARDS ─── */
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .social-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .social-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .social-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .social-card.ig::before { background: linear-gradient(90deg, #E1306C, #833AB4, #FCAF45); }
+  .social-card.tt::before { background: linear-gradient(90deg, #010101, #69C9D0, #EE1D52); }
+  .social-card:hover::before { opacity: 1; }
+  .social-icon { font-size: 2.2rem; }
+  .social-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  .social-handle { font-size: 0.85rem; color: var(--text-dim); }
+  .social-action {
+    display: inline-block;
+    padding: 0.5rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-top: 0.5rem;
+    transition: all 0.25s;
+  }
+  .social-card.ig .social-action { background: rgba(225,48,108,0.12); color: #E1306C; border: 1px solid rgba(225,48,108,0.3); }
+  .social-card.tt .social-action { background: rgba(105,201,208,0.1); color: #69C9D0; border: 1px solid rgba(105,201,208,0.25); }
+  .social-card.ig:hover .social-action { background: rgba(225,48,108,0.22); }
+  .social-card.tt:hover .social-action { background: rgba(105,201,208,0.2); }
+  @media (max-width: 600px) { .social-grid { grid-template-columns: 1fr; max-width: 360px; margin-left: auto; margin-right: auto; } }
+
+
+  /* ─── FAQ ─── */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    max-width: 780px;
+  }
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .faq-item.open {
+    border-color: var(--border-bright);
+  }
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    gap: 1rem;
+    user-select: none;
+  }
+  .faq-question span {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .faq-icon {
+    width: 26px; height: 26px;
+    background: rgba(139,31,255,0.15);
+    border: 1px solid rgba(139,31,255,0.3);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+    color: var(--purple-glow);
+    transition: transform 0.3s, background 0.3s;
+    font-style: normal;
+  }
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: rgba(139,31,255,0.3);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s;
+    padding: 0 1.5rem;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 200px;
+    padding: 0 1.5rem 1.25rem;
+  }
+  .faq-answer p {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    line-height: 1.7;
+  }
+
+
+  /* ─── TERMS FORM ─── */
+  #terminos { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+
+  .terms-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .terms-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    max-height: 380px;
+    overflow-y: auto;
+  }
+  .terms-box::-webkit-scrollbar { width: 3px; }
+  .terms-box::-webkit-scrollbar-thumb { background: var(--purple-core); border-radius: 2px; }
+
+  .terms-block { margin-bottom: 1.5rem; }
+  .terms-block-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--purple-glow);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .terms-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .terms-block ul li {
+    font-size: 0.82rem;
+    color: var(--white-dim);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .terms-block ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--purple-dim);
+    font-size: 0.75rem;
+  }
+
+  .terms-form {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .form-group input, .form-group select {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    width: 100%;
+  }
+  .form-group input::placeholder { color: var(--text-dim); }
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--purple-bright);
+    box-shadow: 0 0 0 3px rgba(139,31,255,0.15);
+  }
+  .form-group select option { background: var(--deep); color: var(--white); }
+
+  .form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+  }
+  .form-checkbox input[type="checkbox"] {
+    width: 18px; height: 18px;
+    min-width: 18px;
+    accent-color: var(--purple-core);
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  .form-checkbox span {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .form-checkbox span strong { color: var(--purple-glow); }
+
+  .form-submit {
+    background: linear-gradient(135deg, var(--purple-core), var(--purple-dim));
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 0.95rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 0 25px rgba(139,31,255,0.3);
+    width: 100%;
+  }
+  .form-submit:hover {
+    box-shadow: 0 0 40px rgba(139,31,255,0.6);
+    transform: translateY(-2px);
+  }
+  .form-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+  }
+  .form-success .success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .form-success h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .form-success p { font-size: 0.9rem; color: var(--white-dim); }
+
+  @media (max-width: 768px) {
+    .terms-wrapper { grid-template-columns: 1fr; }
+    .terms-box { max-height: 250px; }
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonios { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .testi-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .testi-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px; right: 20px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba(139,31,255,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .testi-quote {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .testi-quote span {
+    background: linear-gradient(135deg, var(--purple-bright), var(--neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: normal;
+    font-weight: 700;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .testi-avatar {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--purple-core), var(--purple-dim));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+    border: 1px solid rgba(139,31,255,0.4);
+  }
+  .testi-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .testi-role {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.1rem;
+  }
+  .testi-stars {
+    margin-left: auto;
+    color: var(--purple-glow);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  }
+
+
+  /* ─── REVIEW FORM ─── */
+  .review-form-wrapper {
+    margin-top: 3rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    max-width: 600px;
+  }
+  .review-form-wrapper h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+  .review-form-wrapper p {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+  }
+  .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .star-selector {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .star-selector input { display: none; }
+  .star-selector label {
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: rgba(255,255,255,0.15);
+    transition: color 0.15s, transform 0.15s;
+  }
+  .star-selector label:hover,
+  .star-selector label.active { color: var(--purple-glow); transform: scale(1.15); }
+  .review-form textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    resize: none;
+    min-height: 90px;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    width: 100%;
+  }
+  .review-form textarea::placeholder { color: var(--text-dim); }
+  .review-form textarea:focus {
+    border-color: var(--purple-bright);
+    box-shadow: 0 0 0 3px rgba(139,31,255,0.15);
+  }
+  .review-success {
+    display: none;
+    text-align: center;
+    padding: 1.5rem 0 0.5rem;
+  }
+  .review-success p { font-size: 0.9rem; color: var(--white-dim); margin-top: 0.5rem; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.1em;
+  }
+  .footer-logo span { color: var(--purple-bright); }
+  .footer-text { font-size: 0.8rem; color: var(--text-dim); }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--purple-glow); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: rgba(3,1,10,0.97); padding: 1.5rem 5%; gap: 1rem; border-bottom: 1px solid var(--border); }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+
+    .plans-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .drop-banner { flex-direction: column; padding: 2rem; text-align: center; }
+    .drop-actions { align-items: center; }
+    .drop-text p { margin: 0 auto; }
+    .session-card { flex-direction: column; text-align: center; padding: 2rem; }
+    footer { flex-direction: column; text-align: center; }
+    .hero-stats { gap: 1.5rem; }
+    .stat-num { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo"><span>22</span> STUDIOS</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#membresias">Membresías</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#terminos">Membresía</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#testimonios">Artistas</a></li>
+    <li><a href="#portafolio">Portafolio</a></li>
+    <li><a href="#redes">Redes</a></li>
+    <li><a href="#reservas" class="nav-cta">Reservar</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="home" style="padding-top: 120px; max-width: 100%; width: 100%;">
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+
+  <div class="hero-badge">⚡ Cupos limitados este mes</div>
+
+  <h1 class="hero-title">
+    Graba como un<br>
+    <span class="accent">artista profesional</span>
+  </h1>
+
+  <p class="hero-sub">
+    Estudio profesional para artistas que quieren sacar música constante sin perder tiempo. Sistema por horas, claro y transparente.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="https://wa.me/595982592460?text=Hola!%20Quiero%20info%20sobre%20las%20membresías%20de%2022%20Studios" target="_blank" class="btn-primary">
+      🎙️ Reservar sesión
+    </a>
+    <a href="#membresias" class="btn-secondary">
+      Ver planes →
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Planes disponibles</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100K</div>
+      <div class="stat-label">Primera sesión desde</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24H</div>
+      <div class="stat-label">Respuesta garantizada</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona">
+  <div class="section-tag">Sistema</div>
+  <h2 class="section-title">¿Cómo <span>funciona</span>?</h2>
+  <p class="section-desc">Simple. Elegís tu plan, cargás horas, reservás tu sesión y grabás. Sin complicaciones.</p>
+
+  <div class="steps reveal">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <span class="step-icon">🎯</span>
+      <div class="step-title">Elegís tu plan</div>
+      <div class="step-desc">Seleccionás la membresía que se adapta a tu ritmo de trabajo. Desde 2 hasta 10 horas mensuales.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <span class="step-icon">📅</span>
+      <div class="step-title">Reservás tu sesión</div>
+      <div class="step-desc">Agendás con anticipación. El tiempo corre desde la hora pactada, sin sorpresas.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <span class="step-icon">🎤</span>
+      <div class="step-title">Grabás</div>
+      <div class="step-desc">Llegás, grabás y te vas con el material. Workflow rápido para artistas que quieren resultados.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <span class="step-icon">🔊</span>
+      <div class="step-title">Consumís tu saldo</div>
+      <div class="step-desc">Registramos el tiempo usado y tus horas restantes. Control total de tu plan cada mes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DROP BANNER -->
+<div class="drop-section reveal">
+  <div class="drop-banner">
+    <div class="drop-orb"></div>
+    <div class="drop-text">
+      <div class="eyebrow">🔥 Drop mensual</div>
+      <h2>Cupos <span>limitados</span><br>este mes</h2>
+      <p>Cada mes abrimos un número limitado de membresías. Una vez que se llenan, se cierran hasta el siguiente drop. No te quedés afuera.</p>
+    </div>
+    <div class="drop-actions">
+      <div class="cupos-badge">
+        <span class="cupos-dot"></span>
+        10 cupos disponibles este mes
+      </div>
+      <a href="https://wa.me/595982592460?text=Hola!%20Quiero%20unirme%20al%20drop%20de%20membresías%20de%2022%20Studios" target="_blank" class="btn-primary">
+        Unirme al drop →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- MEMBRESÍAS -->
+<section id="membresias">
+  <div class="section-tag">Planes</div>
+  <h2 class="section-title">Elige tu <span>membresía</span></h2>
+  <p class="section-desc">Acceso mensual al estudio. Horas frescas cada mes para que siempre estés grabando.</p>
+
+  <div class="plans-grid reveal">
+    <!-- STARTER -->
+    <div class="plan-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-tagline">Para empezar con el pie derecho</div>
+      <div class="plan-price">
+        <div class="price-amount">350K <span>Gs</span></div>
+        <div class="price-period">por mes</div>
+      </div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>2 horas de grabación mensual</li>
+        <li>Ingeniero de grabación incluido</li>
+        <li>Reserva de sesiones anticipada</li>
+        <li>Control de saldo en tiempo real</li>
+        <li>Mezcla <strong style="color:#f87171">no incluida</strong> — disponible como extra</li>
+      </ul>
+      <a href="https://wa.me/595982592460?text=Hola!%20Me%20interesa%20el%20Plan%20Starter%20de%2022%20Studios" target="_blank" class="plan-cta">Quiero este plan</a>
+    </div>
+
+    <!-- ARTISTA (featured) -->
+    <div class="plan-card featured">
+      <div class="plan-badge">⭐ Más popular</div>
+      <div class="plan-name">Artista</div>
+      <div class="plan-tagline">El favorito de nuestros artistas</div>
+      <div class="plan-price">
+        <div class="price-amount">650K <span>Gs</span></div>
+        <div class="price-period">por mes</div>
+      </div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>5 horas de grabación mensual</li>
+        <li>1 mezcla incluida</li>
+        <li>Reserva de sesiones anticipada</li>
+        <li>Control de saldo en tiempo real</li>
+        <li>Acceso a servicios extra</li>
+        <li>Prioridad en agenda</li>
+      </ul>
+      <a href="https://wa.me/595982592460?text=Hola!%20Me%20interesa%20el%20Plan%20Artista%20de%2022%20Studios" target="_blank" class="plan-cta">Quiero este plan</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="plan-card">
+      <div class="plan-name">Pro</div>
+      <div class="plan-tagline">Para el artista que no para</div>
+      <div class="plan-price">
+        <div class="price-amount">1.1M <span>Gs</span></div>
+        <div class="price-period">por mes</div>
+      </div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>10 horas de grabación mensual</li>
+        <li>2 mezclas incluidas</li>
+        <li>Reserva de sesiones anticipada</li>
+        <li>Control de saldo en tiempo real</li>
+        <li>Acceso a servicios extra</li>
+        <li>Prioridad máxima en agenda</li>
+      </ul>
+      <a href="https://wa.me/595982592460?text=Hola!%20Me%20interesa%20el%20Plan%20Pro%20de%2022%20Studios" target="_blank" class="plan-cta">Quiero este plan</a>
+    </div>
+  </div>
+
+  <!-- Session Promo -->
+  <div class="session-promo" style="padding: 2rem 0 0; max-width: 100%;">
+    <div class="session-card reveal">
+      <div>
+        <h3>¿Primera vez? Probá el estudio</h3>
+        <p>Antes de comprometerte con una membresía, agendá una sesión de prueba a precio especial. Viví la experiencia y después decidís.</p>
+        <div class="session-price">Sesión de prueba desde 100.000 Gs</div>
+      </div>
+      <a href="https://wa.me/595982592460?text=Hola!%20Quiero%20agendar%20una%20sesión%20de%20prueba%20en%2022%20Studios" target="_blank" class="btn-primary">
+        Agendar sesión de prueba
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS EXTRA -->
+<section id="servicios">
+  <div class="section-tag">Extras</div>
+  <h2 class="section-title">Servicios <span>adicionales</span></h2>
+  <p class="section-desc">Potenciá tu música con servicios a la carta. Disponibles para miembros y no miembros.</p>
+
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-glow"></div>
+      <span class="service-icon">⏱️</span>
+      <div class="service-name">Hora extra</div>
+      <div class="service-price">Desde 120.000 Gs</div>
+      <div class="service-desc">Extendé tu sesión cuando lo necesitás</div>
+    </div>
+    <div class="service-card">
+      <div class="service-glow"></div>
+      <span class="service-icon">🎚️</span>
+      <div class="service-name">Mezcla adicional</div>
+      <div class="service-price">300.000 Gs</div>
+      <div class="service-desc">Mezcla profesional para tu canción</div>
+    </div>
+    <div class="service-card">
+      <div class="service-glow"></div>
+      <span class="service-icon">🔊</span>
+      <div class="service-name">Master</div>
+      <div class="service-price">100.000 Gs</div>
+      <div class="service-desc">Masterización lista para plataformas</div>
+    </div>
+    <div class="service-card">
+      <div class="service-glow"></div>
+      <span class="service-icon">🎵</span>
+      <div class="service-name">Beat exclusivo</div>
+      <div class="service-price">450.000 Gs</div>
+      <div class="service-desc">Beat hecho a medida, solo tuyo</div>
+    </div>
+    <div class="service-card">
+      <div class="service-glow"></div>
+      <span class="service-icon">🔄</span>
+      <div class="service-name">Recrear beat</div>
+      <div class="service-price">350.000 Gs</div>
+      <div class="service-desc">Recreamos el estilo que buscás</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 2rem; text-align: center;">
+    <a href="https://wa.me/595982592460?text=Hola!%20Quiero%20info%20sobre%20los%20servicios%20de%2022%20Studios" target="_blank" class="btn-secondary">
+      Consultar precios exactos →
+    </a>
+  </div>
+</section>
+
+<!-- TÉRMINOS -->
+<section id="terminos">
+  <div class="section-tag">Términos</div>
+  <h2 class="section-title">Aceptar <span>condiciones</span></h2>
+  <p class="section-desc">Leé los términos del servicio y completá el formulario para confirmar tu membresía.</p>
+
+  <div class="terms-wrapper reveal">
+
+    <!-- TERMS BOX -->
+    <div class="terms-box">
+      <div class="terms-block">
+        <div class="terms-block-title">⏱️ Horas</div>
+        <ul>
+          <li>Las horas son saldo mensual total, no diario</li>
+          <li>Se pueden usar en una o varias sesiones durante el mes</li>
+          <li>Las horas no usadas no se acumulan al mes siguiente</li>
+          <li>Podés comprar horas extra a 120.000 Gs c/u</li>
+        </ul>
+      </div>
+      <div class="terms-block">
+        <div class="terms-block-title">📅 Sesiones</div>
+        <ul>
+          <li>Las sesiones se agendan con mínimo 24hs de anticipación</li>
+          <li>El tiempo corre desde la hora agendada</li>
+          <li>Hay 30 minutos de tolerancia por tardanza — pasado ese tiempo, las horas se descuentan igual</li>
+          <li>Mínimo por sesión: 1 hora</li>
+        </ul>
+      </div>
+      <div class="terms-block">
+        <div class="terms-block-title">🎤 Artistas adicionales</div>
+        <ul>
+          <li>Podés grabar con colaboradores sin problema</li>
+          <li>Cada artista adicional que grabe sus propias partes tiene un costo de 50.000 Gs por sesión</li>
+          <li>Acompañantes que no graben no tienen costo extra</li>
+        </ul>
+      </div>
+      <div class="terms-block">
+        <div class="terms-block-title">❌ Cancelaciones</div>
+        <ul>
+          <li>Podés cancelar tu membresía avisando con 7 días de anticipación antes del próximo cobro</li>
+          <li>La membresía del mes en curso no se reembolsa</li>
+          <li>Si 22 Studios cancela una sesión agendada, se reprograma sin costo</li>
+        </ul>
+      </div>
+      <div class="terms-block">
+        <div class="terms-block-title">🎚️ Mezcla</div>
+        <ul>
+          <li>Plan Starter: mezcla NO incluida — disponible como extra desde 300.000 Gs</li>
+          <li>Plan Artista: 1 mezcla incluida</li>
+          <li>Plan Pro: 2 mezclas incluidas</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="terms-form" id="termsFormWrapper">
+      <div id="formContent">
+        <div style="margin-bottom:0.5rem;">
+          <div style="font-family:'Rajdhani',sans-serif; font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:0.25rem;">Confirmar membresía</div>
+          <div style="font-size:0.82rem; color:var(--text-dim);">Completá tus datos y aceptá las condiciones para reservar.</div>
+        </div>
+
+        <form id="termsForm" action="https://formspree.io/f/mgonppzw" method="POST">
+          <div style="display:flex; flex-direction:column; gap:1.1rem;">
+
+            <div class="form-group">
+              <label>Nombre artístico</label>
+              <input type="text" name="nombre_artistico" placeholder="¿Cómo te llaman?" required>
+            </div>
+
+            <div class="form-group">
+              <label>Nombre completo</label>
+              <input type="text" name="nombre_completo" placeholder="Tu nombre real" required>
+            </div>
+
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="tu@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label>WhatsApp</label>
+              <input type="tel" name="whatsapp" placeholder="+595 9XX XXX XXX" required>
+            </div>
+
+            <div class="form-group">
+              <label>Plan elegido</label>
+              <select name="plan" required>
+                <option value="" disabled selected>Seleccioná tu plan</option>
+                <option value="Starter - 350.000 Gs">Starter — 350.000 Gs / mes</option>
+                <option value="Artista - 650.000 Gs">Artista — 650.000 Gs / mes</option>
+                <option value="Pro - 1.100.000 Gs">Pro — 1.100.000 Gs / mes</option>
+              </select>
+            </div>
+
+            <label class="form-checkbox">
+              <input type="checkbox" name="acepta_terminos" id="checkTerms" value="Sí, acepto" required>
+              <span>Leí y acepto los <strong>términos y condiciones</strong> de 22 Studios</span>
+            </label>
+
+            <input type="hidden" name="_subject" value="🎙️ Nueva membresía - 22 Studios">
+            <input type="hidden" name="_next" value="">
+
+            <button type="submit" class="form-submit" id="submitBtn">
+              Confirmar membresía ✅
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">🎙️</div>
+        <h3>¡Todo listo!</h3>
+        <p>Recibimos tu confirmación. Te contactamos por WhatsApp en las próximas horas para coordinar tu primera sesión.</p>
+        <a href="https://wa.me/595982592460?text=Hola!%20Acabo%20de%20completar%20el%20formulario%20de%2022%20Studios" target="_blank" class="btn-primary" style="margin-top:1.5rem; display:inline-flex;">
+          Escribir por WhatsApp →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-tag">FAQ</div>
+  <h2 class="section-title">Preguntas <span>frecuentes</span></h2>
+  <p class="section-desc">Todo lo que necesitás saber antes de arrancar.</p>
+
+  <div class="faq-list reveal">
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Cómo funcionan exactamente las horas de mi membresía?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Las horas son un saldo mensual, no horas diarias. Por ejemplo, el Plan Starter incluye <strong style="color:var(--purple-glow)">2 horas en total durante el mes</strong> — no 2 horas por día. Podés usarlas en una sola sesión o dividirlas en varias, como quieras. El saldo se renueva cada mes desde cero y las horas no utilizadas no se acumulan al siguiente mes. Si necesitás más tiempo del que incluye tu plan, podés comprar horas extra a <strong style="color:var(--purple-glow)">120.000 Gs por hora</strong> en cualquier momento.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿El ingeniero de grabación está incluido?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Sí. Todos los planes incluyen ingeniero de grabación. No pagás nada extra por eso — está incluido en tu membresía.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Con cuánta anticipación tengo que reservar mi sesión?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Mínimo 24 horas antes. Esto nos permite organizar la agenda y garantizarte el horario que elegís. Las sesiones sin reserva previa no están garantizadas.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Puedo cancelar mi membresía?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Sí, podés cancelar cuando quieras. Solo necesitamos que nos avises con 7 días de anticipación antes del próximo cobro. La membresía del mes actual no se reembolsa — seguís teniendo acceso hasta que finalice el período pagado.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Puedo grabar con otros artistas en la misma sesión?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Sí, podés traer colaboradores y grabar en grupo. La membresía cubre a un artista principal. Cada artista adicional que grabe sus propias partes tiene un costo de <strong style="color:var(--purple-glow)">50.000 Gs por sesión</strong>. Si solo vienen a acompañar sin grabar, no hay costo extra.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Puedo traer mi propio beat y grabar encima?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Sí, podés traer tu beat y grabamos encima sin costo adicional. Ahora bien, si querés que le agreguemos elementos — efectos, samples, sonidos, capas de producción — eso es trabajo de producción y tiene costo aparte. Consultanos por WhatsApp y te cotizamos según lo que necesitás.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Las horas son solo para grabar o incluyen mezcla y producción?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Las horas de tu membresía son exclusivamente para grabación. La mezcla está incluida en los planes Artista y Pro. Si necesitás mezclas adicionales o producción, están disponibles como servicios extra.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Qué pasa si llego tarde a mi sesión?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Hay <strong style="color:var(--purple-glow)">30 minutos de tolerancia</strong>. Si llegás después de ese tiempo, la sesión se descuenta igual desde la hora agendada. El tiempo corre desde el momento pactado, no desde que llegás, así que te recomendamos llegar puntual para aprovechar al máximo tus horas.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Qué pasa si 22 Studios cancela mi sesión?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Si por algún motivo tenemos que cancelar una sesión ya agendada, la reprogramamos sin ningún costo adicional en el horario que más te convenga. Tus horas no se pierden en ese caso.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Cómo sé cuántas horas me quedan?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Después de cada sesión te informamos el tiempo usado y las horas restantes. Tenés control total de tu saldo en todo momento — solo consultanos por WhatsApp si querés saber tu balance.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="section-tag">Testimonios</div>
+  <h2 class="section-title">Lo que dicen los <span>artistas</span></h2>
+  <p class="section-desc">Palabras de quienes ya grabaron en 22 Studios.</p>
+
+  <div class="testimonials-grid reveal">
+
+    <div class="testi-card">
+      <div class="testi-quote">"<span>El Tainy paraguayo.</span>"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">SP</div>
+        <div>
+          <div class="testi-name">SpyDey</div>
+          <div class="testi-role">Artista — 22 Studios</div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"<span>El mejor productor de Paraguay.</span> 10 de 10."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">CB</div>
+        <div>
+          <div class="testi-name">Caraborrosa</div>
+          <div class="testi-role">Artista — 22 Studios</div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"<span>La cabra.</span>"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">SL</div>
+        <div>
+          <div class="testi-name">Slxw</div>
+          <div class="testi-role">Artista — 22 Studios</div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>
+
+  </div>
+
+      <div class="review-form-wrapper reveal">
+        <h3>¿Ya grabaste con nosotros?</h3>
+        <p>Dejá tu reseña — la leemos y puede aparecer en esta página.</p>
+        <form class="review-form" id="reviewForm" action="https://formspree.io/f/mgonppzw" method="POST">
+
+          <div class="form-group">
+            <label>Nombre artístico</label>
+            <input type="text" name="nombre_review" placeholder="¿Cómo te llaman?" required>
+          </div>
+
+          <div class="form-group">
+            <label>Tu reseña</label>
+            <textarea name="resena" placeholder="Contanos tu experiencia en 22 Studios..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Puntuación</label>
+            <div class="star-selector" id="starSelector">
+              <input type="hidden" name="puntuacion" id="starValue" value="5">
+              <label data-val="1">★</label>
+              <label data-val="2">★</label>
+              <label data-val="3">★</label>
+              <label data-val="4">★</label>
+              <label data-val="5" class="active">★</label>
+            </div>
+          </div>
+
+          <input type="hidden" name="_subject" value="⭐ Nueva reseña - 22 Studios">
+
+          <button type="submit" class="form-submit" id="reviewSubmitBtn" style="margin-top:0.25rem;">
+            Enviar reseña ⭐
+          </button>
+        </form>
+        <div class="review-success" id="reviewSuccess">
+          <div style="font-size:2rem;">🎙️</div>
+          <p>¡Gracias! Recibimos tu reseña. Si la publicamos va a aparecer en esta sección.</p>
+        </div>
+      </div>
+
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="section-tag">Portafolio</div>
+  <h2 class="section-title">Música que salió de <span>22 Studios</span></h2>
+  <p class="section-desc">Artistas reales, resultados reales. Hacé click en cualquier tema para escucharlo en YouTube.</p>
+
+  <div class="yt-grid reveal">
+
+    <a href="https://www.youtube.com/watch?v=HE-Ird-_77Y" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/HE-Ird-_77Y/maxresdefault.jpg" alt="AGUA - FuxzeK" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">AGUA</div>
+        <div class="yt-artist">FuxzeK • 22 Studios</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=4DU-KAFxdRk" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/4DU-KAFxdRk/maxresdefault.jpg" alt="CBTRAP VOL 2" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">CBTRAP VOL 2</div>
+        <div class="yt-artist">Fuxzek x Slxw x xviru</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=1fVJ-iGfAXc" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/1fVJ-iGfAXc/maxresdefault.jpg" alt="Insípido" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Insípido</div>
+        <div class="yt-artist">xviru • Prod. 22 gang</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=1oytVyPQRVI" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/1oytVyPQRVI/maxresdefault.jpg" alt="MAL PLAN" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">MAL PLAN</div>
+        <div class="yt-artist">Fuxzek ft Nanii</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=9ovl5LMpEDc" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/9ovl5LMpEDc/maxresdefault.jpg" alt="KYLO REN" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">KYLO REN</div>
+        <div class="yt-artist">SpyDey Ft FuxzeK</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=nsnp4vNryrU" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/nsnp4vNryrU/maxresdefault.jpg" alt="TU VOZ" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">TU VOZ</div>
+        <div class="yt-artist">SpyDey • 22 Studios</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=u32O4V_tMuU" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/u32O4V_tMuU/maxresdefault.jpg" alt="2 pa 2" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">2 PA 2</div>
+        <div class="yt-artist">Cris J X Yashi</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=asiyZxZTOqA" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/asiyZxZTOqA/maxresdefault.jpg" alt="Vamo a bailar" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">VAMO A BAILAR</div>
+        <div class="yt-artist">Cris J</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=tLhg2BezJXc" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/tLhg2BezJXc/maxresdefault.jpg" alt="EL WEZ - Donde" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">DONDE</div>
+        <div class="yt-artist">El Wez • Prod. 22 Studios</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=89vsFo5v-YU" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/89vsFo5v-YU/maxresdefault.jpg" alt="Sangre Nueva" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">SANGRE NUEVA</div>
+        <div class="yt-artist">El Wez ft FuxzeK • 22 Studios</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=lmtl-rvpJWE" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/lmtl-rvpJWE/maxresdefault.jpg" alt="TAKERO$" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">TAKERO$</div>
+        <div class="yt-artist">DUNN</div>
+      </div>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=-JGFic01rVo" target="_blank" class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/-JGFic01rVo/maxresdefault.jpg" alt="CUESTE LO QUE CUESTE" loading="lazy">
+        <div class="yt-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">CUESTE LO QUE CUESTE</div>
+        <div class="yt-artist">DUNN</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- REDES SOCIALES -->
+<section id="redes">
+  <div class="section-tag">Seguinos</div>
+  <h2 class="section-title">Seguí a <span>22 Studios</span></h2>
+  <p class="section-desc">Contenido del estudio, artistas, drops y novedades en nuestras redes.</p>
+  <div class="social-grid reveal">
+    <a href="https://www.instagram.com/22_studiooficcial/" target="_blank" class="social-card ig">
+      <div class="social-icon">📸</div>
+      <div class="social-name">Instagram</div>
+      <div class="social-handle">@22_studiooficcial</div>
+      <div class="social-action">Seguir</div>
+    </a>
+    <a href="https://www.tiktok.com/@fuxzekoficcial" target="_blank" class="social-card tt">
+      <div class="social-icon">🎵</div>
+      <div class="social-name">TikTok</div>
+      <div class="social-handle">@fuxzekoficcial</div>
+      <div class="social-action">Seguir</div>
+    </a>
+  </div>
+</section>
+
+<!-- RESERVAS -->
+<section id="reservas">
+  <div class="section-tag">Contacto</div>
+  <h2 class="section-title">Reservá tu <span>sesión</span></h2>
+  <p class="section-desc">Escribinos por el canal que prefieras. Respondemos rápido.</p>
+
+  <div class="contact-grid reveal">
+    <a href="https://wa.me/595982592460?text=Hola!%20Quiero%20reservar%20en%2022%20Studios" target="_blank" class="contact-card wa">
+      <div class="contact-icon">💬</div>
+      <div class="contact-name">WhatsApp</div>
+      <div class="contact-handle">+595 982 592 460</div>
+      <div class="contact-action">Escribir ahora</div>
+    </a>
+    <a href="https://www.instagram.com/22_studiooficcial/" target="_blank" class="contact-card ig">
+      <div class="contact-icon">📸</div>
+      <div class="contact-name">Instagram</div>
+      <div class="contact-handle">@FuxzeK_cb</div>
+      <div class="contact-action">Seguir & escribir</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>22</span> STUDIOS</div>
+  <div class="footer-text">Convierte tus ideas en canciones reales.</div>
+  <ul class="footer-links">
+    <li><a href="#membresias">Membresías</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#reservas">Contacto</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+
+  // Form submission
+  const form = document.getElementById('termsForm');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          document.getElementById('formContent').style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Error, intentá de nuevo';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Error, intentá de nuevo';
+        btn.disabled = false;
+      }
+    });
+  }
+
+
+  // Star selector
+  const stars = document.querySelectorAll('#starSelector label');
+  const starValue = document.getElementById('starValue');
+  stars.forEach((star, i) => {
+    star.addEventListener('click', () => {
+      const val = parseInt(star.getAttribute('data-val'));
+      starValue.value = val;
+      stars.forEach((s, j) => s.classList.toggle('active', j < val));
+    });
+  });
+
+  // Review form
+  const reviewForm = document.getElementById('reviewForm');
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('reviewSubmitBtn');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(reviewForm.action, {
+          method: 'POST',
+          body: new FormData(reviewForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          reviewForm.style.display = 'none';
+          document.getElementById('reviewSuccess').style.display = 'block';
+        } else {
+          btn.textContent = 'Error, intentá de nuevo';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Error, intentá de nuevo';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
