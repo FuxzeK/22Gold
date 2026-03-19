@@ -1443,6 +1443,45 @@
   }
   .review-success p { font-size: 0.9rem; color: var(--white-dim); margin-top: 0.5rem; }
 
+
+  /* ─── LOCATION ─── */
+  #ubicacion { padding: 90px 5%; max-width: 1200px; margin: 0 auto; }
+  .map-wrapper {
+    margin-top: 3rem;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .map-wrapper iframe {
+    width: 100%;
+    height: 380px;
+    border: none;
+    display: block;
+    filter: grayscale(30%) contrast(1.1);
+  }
+  .map-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(3,1,10,0.9);
+    border: 1px solid var(--border-bright);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    backdrop-filter: blur(10px);
+  }
+  .map-overlay .studio-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+  .map-overlay .studio-address {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
   /* ─── FOOTER ─── */
   footer {
     border-top: 1px solid var(--border);
@@ -1529,6 +1568,7 @@
     <li><a href="#testimonios">Artistas</a></li>
     <li><a href="#portafolio">Portafolio</a></li>
     <li><a href="#redes">Redes</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
     <li><a href="#reservas" class="nav-cta">Reservar</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -1803,6 +1843,9 @@
           <li>El tiempo corre desde la hora agendada</li>
           <li>Hay 30 minutos de tolerancia por tardanza — pasado ese tiempo, las horas se descuentan igual</li>
           <li>Mínimo por sesión: 1 hora</li>
+          <li>No-show con +24hs de aviso: se reprograma sin costo</li>
+          <li>No-show con menos de 24hs: se descuenta 1 hora del saldo</li>
+          <li>No-show sin aviso: se descuenta la sesión completa</li>
         </ul>
       </div>
       <div class="terms-block">
@@ -1822,6 +1865,23 @@
         </ul>
       </div>
       <div class="terms-block">
+        <div class="terms-block-title">💳 Formas de pago</div>
+        <ul>
+          <li>Transferencia bancaria o efectivo</li>
+          <li>El pago es siempre previo al inicio del trabajo</li>
+          <li>No se inicia ningún trabajo sin pago confirmado</li>
+        </ul>
+      </div>
+      <div class="terms-block">
+        <div class="terms-block-title">⚖️ Derechos y archivos</div>
+        <ul>
+          <li>Los archivos de grabación se entregan al artista al finalizar la sesión — no guardamos copias</li>
+          <li>Al pagar el beat exclusivo, todos los derechos son del artista</li>
+          <li>El crédito "prod. by FuxzeK" debe figurar en el tema</li>
+          <li>El beat incluido en planes tiene hasta 2 revisiones sin costo — sin reembolso una vez iniciada la producción</li>
+        </ul>
+      </div>
+      <div class="terms-block">
         <div class="terms-block-title">💰 Descuentos por plan</div>
         <ul>
           <li>Plan Starter: sin descuento en servicios extra</li>
@@ -1832,11 +1892,23 @@
         </ul>
       </div>
       <div class="terms-block">
-        <div class="terms-block-title">🎚️ Mezcla</div>
+        <div class="terms-block-title">🎚️ Mezcla y revisiones</div>
         <ul>
-          <li>Plan Starter: mezcla NO incluida — disponible como extra desde 300.000 Gs</li>
-          <li>Plan Artista: 1 mezcla incluida</li>
-          <li>Plan Pro: 2 mezclas incluidas</li>
+          <li>Plan Starter: mezcla básica incluida — 1 revisión</li>
+          <li>Plan Artista: mezcla completa incluida — 2 revisiones</li>
+          <li>Plan Pro: mezcla completa incluida — 3 revisiones</li>
+          <li>Revisiones adicionales tienen costo extra</li>
+          <li>Mezcla básica: balance de voz y efectos básicos sobre beat cerrado</li>
+          <li>Mezcla completa: mezcla profesional detallada</li>
+        </ul>
+      </div>
+      <div class="terms-block">
+        <div class="terms-block-title">🎵 Beats incluidos en planes</div>
+        <ul>
+          <li>Los beats son 100% bajo pedido — no son de catálogo</li>
+          <li>Si no solicitás el beat durante el mes, se pierde — no se acumula</li>
+          <li>El precio especial de drops (700k) aplica solo a beats del drop, no a beats bajo pedido</li>
+          <li>El descuento de 150k en membresía aplica solo durante el mismo mes de la sesión de prueba</li>
         </ul>
       </div>
     </div>
@@ -2035,6 +2107,56 @@
       </div>
       <div class="faq-answer">
         <p>Después de cada sesión te informamos el tiempo usado y las horas restantes. Tenés control total de tu saldo en todo momento — solo consultanos por WhatsApp si querés saber tu balance.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Qué pasa si no uso el beat incluido en mi plan ese mes?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>El beat incluido en tu plan es bajo pedido — lo hacemos cuando lo pedís. Si no lo solicitás durante el mes, se pierde junto con las horas no usadas. No se acumula al mes siguiente, así que te recomendamos aprovecharlo dentro del período mensual.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Cuántas revisiones de mezcla están incluidas?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Depende del plan. <strong style="color:var(--purple-glow)">Plan Starter: 1 revisión</strong> (mezcla básica sobre beat cerrado — balance de voz, efectos básicos). <strong style="color:var(--purple-glow)">Plan Artista: 2 revisiones</strong> (mezcla completa). <strong style="color:var(--purple-glow)">Plan Pro: 3 revisiones</strong> (mezcla completa con más detalle). Revisiones adicionales tienen costo extra.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Qué pasa si no puedo ir a mi sesión agendada?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Depende de con cuánta anticipación avisás. Si avisás con <strong style="color:var(--purple-glow)">más de 24hs</strong>, se reprograma sin costo. Si avisás con <strong style="color:#f87171">menos de 24hs</strong>, se descuenta 1 hora de tu saldo. Si <strong style="color:#f87171">no avisás</strong>, se descuenta la sesión completa. Siempre avisá con tiempo para evitar perder horas.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>El descuento de 150k por sesión de prueba, ¿hasta cuándo aplica?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>El descuento de 150k en tu primera membresía es válido <strong style="color:var(--purple-glow)">solo durante el mismo mes</strong> en que hiciste la sesión de prueba. Si esperás al mes siguiente, el descuento ya no aplica.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿El precio especial de beats del drop aplica a beats bajo pedido?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>No. El precio especial de 700.000 Gs es exclusivo para los beats que lanzamos en los drops mensuales — beats ya producidos y listos para escuchar. Los beats bajo pedido (hechos desde cero para tu proyecto) tienen su precio normal desde 450.000 Gs, sin importar el plan.</p>
       </div>
     </div>
 
@@ -2268,6 +2390,46 @@
       </div>
     </a>
 
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Cómo se realiza el pago?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Aceptamos <strong style="color:var(--purple-glow)">transferencia bancaria</strong> y <strong style="color:var(--purple-glow)">efectivo</strong>. El pago siempre es previo al inicio del trabajo — ya sea la sesión, el beat o la membresía. Una vez confirmado el pago coordinamos todo.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Qué pasa con mis archivos de grabación después de la sesión?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Los archivos son tuyos. Te los entregamos al finalizar la sesión y nosotros no guardamos copias. Es tu responsabilidad respaldarlos una vez que los recibís.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿De quién son los derechos del beat exclusivo?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Al pagar el beat exclusivo, todos los derechos son tuyos. Podés subirlo a plataformas, monetizarlo y usarlo como quieras. El único crédito que pedimos es que figure <strong style="color:var(--purple-glow)">"prod. by FuxzeK"</strong> en el tema.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>¿Qué pasa si no quedo conforme con el beat?</span>
+        <i class="faq-icon">+</i>
+      </div>
+      <div class="faq-answer">
+        <p>Incluimos <strong style="color:var(--purple-glow)">hasta 2 revisiones sin costo</strong> después de entregado el beat. Antes de arrancar a producirlo te pedimos toda la información necesaria — referencia, género, vibe — para minimizar cambios. No hay reembolso una vez iniciada la producción.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2288,6 +2450,32 @@
       <div class="social-name">TikTok</div>
       <div class="social-handle">@fuxzekoficcial</div>
       <div class="social-action">Seguir</div>
+    </a>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion">
+  <div class="section-tag">Ubicación</div>
+  <h2 class="section-title">Dónde <span>estamos</span></h2>
+  <p class="section-desc">Vení a conocer el estudio. Cañada San Rafael, Paraguay.</p>
+
+  <div class="map-wrapper reveal">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3606.5!2d-57.4637833!3d-25.303278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2spy!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <div class="map-overlay">
+      <div class="studio-tag">🎙️ 22 Studios</div>
+      <div class="studio-address">Cañada San Rafael, Paraguay</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem; text-align:center;">
+    <a href="https://maps.app.goo.gl/ZFcD1NLondvDWFJJ9" target="_blank" class="btn-secondary">
+      Abrir en Google Maps →
     </a>
   </div>
 </section>
@@ -2429,4 +2617,3 @@
 </script>
 </body>
 </html>
-
