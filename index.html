@@ -1482,6 +1482,196 @@
     color: var(--text-dim);
   }
 
+
+  /* ─── DOBLE HIT PACK ─── */
+  .pack-banner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 5% 60px;
+  }
+  .pack-card {
+    background: linear-gradient(160deg, #130a24, #0c0519);
+    border: 1px solid rgba(139,31,255,0.5);
+    border-radius: 20px;
+    padding: 3rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(139,31,255,0.15);
+  }
+  .pack-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--neon), var(--purple-bright), var(--neon), transparent);
+  }
+  .pack-orb {
+    position: absolute;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,121,249,0.12), transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .pack-orb-2 {
+    position: absolute;
+    left: -80px; bottom: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(139,31,255,0.1), transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .pack-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .pack-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232,121,249,0.12);
+    border: 1px solid rgba(232,121,249,0.35);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+  .pack-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+  }
+  .pack-title span {
+    background: linear-gradient(135deg, var(--purple-bright), var(--neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .pack-subtitle {
+    font-size: 1rem;
+    color: var(--white-dim);
+    margin-bottom: 1.75rem;
+  }
+  .pack-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .pack-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .pack-features li::before {
+    content: '';
+    width: 16px; height: 16px;
+    background: rgba(232,121,249,0.15);
+    border: 1px solid rgba(232,121,249,0.4);
+    border-radius: 4px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23e879f9' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .pack-limited {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 0.25rem;
+  }
+  .pack-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-width: 220px;
+  }
+  .pack-cupos {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232,121,249,0.08);
+    border: 1px solid rgba(232,121,249,0.25);
+    border-radius: 8px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--neon);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .pack-price {
+    text-align: center;
+  }
+  .pack-price-amount {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--white), var(--purple-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .pack-price-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+  }
+  .pack-price-old {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-decoration: line-through;
+    margin-bottom: 0.25rem;
+  }
+  .pack-cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #e879f9, #a855f7);
+    color: var(--white);
+    border: none;
+    box-shadow: 0 0 30px rgba(232,121,249,0.4);
+    transition: all 0.25s;
+    white-space: nowrap;
+    width: 100%;
+  }
+  .pack-cta:hover {
+    box-shadow: 0 0 50px rgba(232,121,249,0.6);
+    transform: translateY(-2px);
+  }
+  @media (max-width: 768px) {
+    .pack-inner { grid-template-columns: 1fr; }
+    .pack-right { width: 100%; }
+    .pack-features { grid-template-columns: 1fr; }
+    .pack-card { padding: 2rem; }
+  }
   /* ─── FOOTER ─── */
   footer {
     border-top: 1px solid var(--border);
@@ -1743,6 +1933,44 @@
   </div>
 
   <!-- Session Promo -->
+<!-- DOBLE HIT PACK -->
+<div class="pack-banner reveal">
+  <div class="pack-card">
+    <div class="pack-orb"></div>
+    <div class="pack-orb-2"></div>
+    <div class="pack-inner">
+      <div class="pack-left">
+        <div class="pack-badge">🔥 Promo limitada</div>
+        <div class="pack-title">DOBLE HIT<br><span>PACK</span></div>
+        <div class="pack-subtitle">2 temas completos y listos para plataformas</div>
+        <ul class="pack-features">
+          <li>2 beats exclusivos</li>
+          <li>4 horas de grabación</li>
+          <li>2 mezclas completas</li>
+          <li>2 masters incluidos</li>
+          <li>4 revisiones incluidas</li>
+          <li>Ingeniero incluido</li>
+        </ul>
+        <div class="pack-limited">⏳ Solo por tiempo limitado — cupos limitados</div>
+      </div>
+      <div class="pack-right">
+        <div class="pack-cupos">
+          <span class="cupos-dot"></span>
+          Quedan 5 cupos
+        </div>
+        <div class="pack-price">
+          <div class="pack-price-old">Precio normal: 2.200.000 Gs</div>
+          <div class="pack-price-amount">900K</div>
+          <div class="pack-price-label">Guaraníes — 2 temas completos</div>
+        </div>
+        <a href="https://wa.me/595982592460?text=Hola!%20Quiero%20el%20Doble%20Hit%20Pack%20de%2022%20Studios" target="_blank" class="pack-cta">
+          Quiero el pack 🔥
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="session-promo" style="padding: 2rem 0 0; max-width: 100%;">
     <div class="session-card reveal">
       <div>
@@ -2621,3 +2849,4 @@
 </script>
 </body>
 </html>
+
